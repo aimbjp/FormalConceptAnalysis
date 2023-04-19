@@ -1,4 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 
 namespace FormalConceptAnalysis
 {
@@ -30,12 +32,27 @@ namespace FormalConceptAnalysis
                         if (formalContext != null) OutputFormalContext(formalContext);
                         else formalContext = InputFormalContext();
                         break;
+                    case '4':
+                        if (formalContext != null) SaveFormalContext(formalContext);
+                        else formalContext = InputFormalContext();
+                        break;
                     case 'e': 
                         _flagStopExecution = true; 
                         break;
                 }
             }
         }
+
+        private static void SaveFormalContext(FormalContext formalContext)
+        {
+            Console.WriteLine("Input file path + name (C:\\folder\\name)");
+            var filePath = Console.ReadLine();
+            filePath += ".json";
+            Console.WriteLine("Saving formal context...");
+            var ser = JsonConvert.SerializeObject(formalContext, Formatting.Indented);
+            File.WriteAllText(@filePath, ser);
+        }
+
         /// <summary>
         /// Show chosen diagram of the formal context 
         /// </summary>
@@ -89,7 +106,49 @@ namespace FormalConceptAnalysis
         /// <returns>FormalContext object</returns>
         private static FormalContext InputFormalContext()
         {
+            FormalContext fc = null;
+            ShowInputMenu();
+            switch (char.ToLower(Console.ReadKey(true).KeyChar))
+            {
+                case '1':
+                    fc = JSONInput();
+                    break;
+                case '2':
+                    fc = ManualInput();
+                    break;
+                default:
+                    fc = JSONInput();
+                    break;
+            }
+
+            void ShowInputMenu()
+            {
+                Console.Clear();
+                Console.WriteLine("Which method? JSON - 1; Manual - 2");
+            }
+            
+            
+            return fc;
+        }
+
+        private static FormalContext JSONInput()
+        {
+            Console.WriteLine("Input path to file (C:\\folder\\name)");
+            var filePath = Console.ReadLine();
+            filePath += ".json";
+            Console.WriteLine("Uploading formal context...");
+            var fileContent = File.ReadAllText(@filePath);
+            var fc = JsonConvert.DeserializeObject<FormalContext>(@fileContent);
+            var ser = JsonConvert.SerializeObject(fc, Formatting.Indented);
+            File.WriteAllText(@"controlJSONInput.json", ser);
+            return fc;
+        }
+
+
+        private static FormalContext ManualInput()
+        {
             Console.Clear();
+            
             Console.WriteLine("Input Formal Context\n" + "Input objects names ( obj1, ..., objN ): ");
             var objectsNames = Console.ReadLine();
             Console.WriteLine("Input attribute names ( attr1, ..., attrN ): ");
@@ -97,8 +156,9 @@ namespace FormalConceptAnalysis
             Console.WriteLine("Input incidence ( 0: 1,3; ...; N:2,3 ): ");
             var incidence = Console.ReadLine();
             
-            return new FormalContext(objectsNames, attributeNames, incidence);
+            return new FormalContext(objectsNames.Replace(", ", ",").Split(separator: ','), attributeNames.Replace(", ", ",").Split(separator: ','), incidence.Replace(",", ".").Replace("; ", ";").Split(separator: ';'));
         }
+
         /// <summary>
         /// Output formal context to console
         /// like ObjectNames: obj1, ..., objN
