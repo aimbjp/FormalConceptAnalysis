@@ -7,6 +7,7 @@ namespace FormalConceptAnalysis
     internal class Program
     {
         private static bool _flagStopExecution = false;
+        
         /// <summary>
         /// Enterence in the program
         /// main communication with the user
@@ -15,6 +16,8 @@ namespace FormalConceptAnalysis
         internal static void Main()
         {
             FormalContext formalContext = null;
+            Lattice? LatticeAddAtom = null;
+            Lattice? LatticeAddIntent = null;
             while (!_flagStopExecution)
             {
                 ShowMenu();
@@ -22,19 +25,19 @@ namespace FormalConceptAnalysis
                 switch (char.ToLower(Console.ReadKey(true).KeyChar))
                 {
                     case '1': 
-                        formalContext = InputFormalContext(); 
+                        formalContext = InputFormalContext(formalContext); 
                         break;
                     case '2':
-                        if (formalContext != null) ShowDiagramFormalContext(formalContext);
-                        else formalContext = InputFormalContext();
+                        if (formalContext != null) ShowDiagramFormalContext(formalContext, LatticeAddAtom, LatticeAddIntent);
+                        else formalContext = InputFormalContext(formalContext);
                         break;
                     case '3':
                         if (formalContext != null) OutputFormalContext(formalContext);
-                        else formalContext = InputFormalContext();
+                        else formalContext = InputFormalContext(formalContext);
                         break;
                     case '4':
                         if (formalContext != null) SaveFormalContext(formalContext);
-                        else formalContext = InputFormalContext();
+                        else formalContext = InputFormalContext(formalContext);
                         break;
                     case 'e': 
                         _flagStopExecution = true; 
@@ -57,25 +60,124 @@ namespace FormalConceptAnalysis
         /// Show chosen diagram of the formal context 
         /// </summary>
         /// <param name="formalContext"></param>
-        private static void ShowDiagramFormalContext(FormalContext formalContext)
+        /// <param name="LatticeAddAtom"></param>
+        /// <param name="LatticeAddIntent"></param>
+        /// 
+        private static void ShowDiagramFormalContext(FormalContext formalContext, Lattice LatticeAddAtom, Lattice LatticeAddIntent)
         {
-            var flagShowDiagram = true;
-            Console.Clear();
-            Console.WriteLine("Diagram of the formal context\n" +
-                              "Choose algorithm\n" +
-                              "AddAtom ( 'a' ) \n" +
-                              "AddIntent ( 'i' )\n" +
-                              "Both ( 'b' )\n" +
-                              "Main menu ( 'm' )");
-            switch (char.ToLower(Console.ReadKey(true).KeyChar))
+            var flagClose = false;
+            var flagTechSave = false;
+            ShowMenuDiagram();
+            while (!flagClose)
             {
-                case 'a': ; break;
-                case 'i': ; break;
-                case 'b': ; break;
-                case 'm': flagShowDiagram = false; break;
+                switch (char.ToLower(Console.ReadKey(true).KeyChar))
+                {
+                    case 'a':
+                    {
+                        LatticeAddAtom = new Lattice(formalContext, "AddAtom");
+                        ShowLattice();
+                        ShowMenuDiagram();
+                    }
+                        break;
+                    case 'i':
+                    {
+                        LatticeAddIntent = new Lattice(formalContext, "AddIntent");
+                        ShowLattice();
+                        ShowMenuDiagram();
+                    }
+                        break;
+                    case 'b':
+                    {
+                        LatticeAddAtom = new Lattice(formalContext, "AddAtom");
+                        LatticeAddIntent = new Lattice(formalContext, "AddIntent");
+                        ShowLattice();
+                        ShowMenuDiagram();
+                    }
+                        break;
+                    case 's':
+                    {
+                        SaveLattice();
+                        ShowMenuDiagram();
+                    }
+                        break;
+                    case 'm':
+                        flagClose = true;
+                        break;
+                }
             }
-            if (!flagShowDiagram) return;
+
+            void SaveLattice()
+            {
+                string filePath;
+                if (flagTechSave == false)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Input file path + name (C:\\folder\\name)");
+                    filePath = Console.ReadLine();
+                    Console.WriteLine("Saving lattice...");
+                }
+                else
+                {
+                    flagTechSave = false;
+                    filePath = "forOutPut";
+                }
+                
+                var filePathAtom = filePath + "AddAtom.json";
+                var filePathIntent = filePath + "AddIntent.json";
+                if (LatticeAddAtom != null)
+                {
+                    var ser = JsonConvert.SerializeObject(LatticeAddAtom, Formatting.Indented);
+                    File.WriteAllText(@filePathAtom, ser);
+                }
+                if (LatticeAddIntent != null)
+                {
+                    var ser = JsonConvert.SerializeObject(LatticeAddIntent, Formatting.Indented);
+                    File.WriteAllText(@filePathIntent, ser);
+                }
+                
+                return;
+            }
+            
+            void ShowMenuDiagram()
+            {
+                Console.Clear();
+                Console.WriteLine("Diagram of the formal context\n" +
+                                  "Choose algorithm\n" +
+                                  "AddAtom ( 'a' ) \n" +
+                                  "AddIntent ( 'i' )\n" +
+                                  "Both ( 'b' )\n" +
+                                  "Save to file ( 's' ) \n" +
+                                  "Main menu ( 'm' )");
+            }
+            
+            void ShowLattice()
+            {
+                Console.WriteLine("Lattice: \n");
+                flagTechSave = true;
+                SaveLattice();
+                string fileContent;
+                if (LatticeAddAtom != null)
+                {
+                    Console.WriteLine("\n////////////////////////\nAddAtom\n////////////////////////////\n");
+                    fileContent = File.ReadAllText(@"forOutputAddAtom.json");
+                    Console.WriteLine(fileContent);
+                }
+                if (LatticeAddIntent != null)
+                {
+                    Console.WriteLine("\n////////////////////////\nAddIntent\n////////////////////////////\n");
+                    fileContent = File.ReadAllText(@"forOutputAddIntent.json");
+                    Console.WriteLine(fileContent);
+                }
+                Console.WriteLine("\nInput any to come back\n");
+                switch (char.ToLower(Console.ReadKey(true).KeyChar))
+                {
+                    default:
+                        return;
+                }
+            }
         }
+
+        
 
         /// <summary>
         /// Show information about the program
@@ -104,7 +206,7 @@ namespace FormalConceptAnalysis
         /// Incidence: 0: 1,2; ...; N: 2,3
         /// </summary>
         /// <returns>FormalContext object</returns>
-        private static FormalContext InputFormalContext()
+        private static FormalContext InputFormalContext(FormalContext formalContextMain)
         {
             FormalContext fc = null;
             ShowInputMenu();
@@ -116,21 +218,22 @@ namespace FormalConceptAnalysis
                 case '2':
                     fc = ManualInput();
                     break;
-                default:
-                    fc = JSONInput();
+                case 'e':
+                {
+                    return formalContextMain;
+                }
                     break;
             }
 
             void ShowInputMenu()
             {
                 Console.Clear();
-                Console.WriteLine("Which method? JSON - 1; Manual - 2");
+                Console.WriteLine("Which method? JSON - 1; Manual - 2; exit - e");
             }
             
             
             return fc;
         }
-
         private static FormalContext JSONInput()
         {
             Console.WriteLine("Input path to file (C:\\folder\\name)");
@@ -143,8 +246,6 @@ namespace FormalConceptAnalysis
             File.WriteAllText(@"controlJSONInput.json", ser);
             return fc;
         }
-
-
         private static FormalContext ManualInput()
         {
             Console.Clear();
@@ -156,7 +257,7 @@ namespace FormalConceptAnalysis
             Console.WriteLine("Input incidence ( 0: 1,3; ...; N:2,3 ): ");
             var incidence = Console.ReadLine();
             
-            return new FormalContext(objectsNames.Replace(", ", ",").Split(separator: ','), attributeNames.Replace(", ", ",").Split(separator: ','), incidence.Replace(",", ".").Replace("; ", ";").Split(separator: ';'));
+            return new FormalContext(objectsNames.Replace(", ", ",").Split(separator: ','), attributeNames.Replace(", ", ",").Split(separator: ','), incidence.Replace("; ", ";").Split(separator: ';'));
         }
 
         /// <summary>

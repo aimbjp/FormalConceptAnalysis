@@ -11,4 +11,10 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="FormalConceptAnalysis">
+        <HintPath>..\..\FormalConceptAnalysis.test\FormalConceptAnalysis\FormalConceptAnalysis\obj\Debug\net7.0\ref\FormalConceptAnalysis.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
