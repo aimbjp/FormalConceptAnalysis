@@ -42,7 +42,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c46c33a5_002D3787_002D4738_002D8610_002Dd22b7239c808/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AddAtom_Compare_AddIntent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cc0a3e23_002D7a76_002D456a_002D876a_002Da22fe63775b4/@EntryIndexedValue"></s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e4cb4673_002D13d5_002D4c9c_002Da1a4_002D19aac0311d97/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.Tests.Test1&lt;/TestId&gt;

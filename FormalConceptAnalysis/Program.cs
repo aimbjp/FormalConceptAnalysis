@@ -28,7 +28,7 @@ namespace FormalConceptAnalysis
                         formalContext = InputFormalContext(formalContext); 
                         break;
                     case '2':
-                        if (formalContext != null) ShowDiagramFormalContext(formalContext, LatticeAddAtom, LatticeAddIntent);
+                        if (formalContext != null) LatticeAddAtom = ShowDiagramFormalContext(formalContext, LatticeAddAtom, LatticeAddIntent);
                         else formalContext = InputFormalContext(formalContext);
                         break;
                     case '3':
@@ -39,11 +39,60 @@ namespace FormalConceptAnalysis
                         if (formalContext != null) SaveFormalContext(formalContext);
                         else formalContext = InputFormalContext(formalContext);
                         break;
+                    case '5':
+                    {
+                        if (formalContext != null)
+                        {
+                            if (LatticeAddAtom != null) ShowRecommended(LatticeAddAtom, formalContext);
+                            else if (LatticeAddIntent != null) ShowRecommended(LatticeAddIntent, formalContext);
+                            else LatticeAddAtom = ShowDiagramFormalContext(formalContext, LatticeAddAtom, LatticeAddIntent);
+                        }
+                        else
+                        {
+                            formalContext = InputFormalContext(formalContext);
+                        }
+                    }
+                        break;
                     case 'e': 
                         _flagStopExecution = true; 
                         break;
                 }
             }
+        }
+
+        private static void ShowRecommended(Lattice lattice, FormalContext formalContext)
+        {
+            var maxAttributes = 0;
+            var maxObjects = 0;
+            Node maxAtr = new Node();
+            Node maxObj = new Node();
+            foreach (var node in lattice.nodes)
+            {
+                if (node.Attributes.Count > maxAttributes && node.Objects.Count > 0)
+                {
+                    maxAttributes = node.Attributes.Count;
+                    maxAtr = node;
+                    if (node.Objects.Count > maxObjects)
+                    {
+                        maxAttributes = node.Objects.Count;
+                        maxObj = node;
+                    }
+                }
+            }
+
+            var atributes = "";
+            var objects = "";
+            atributes = maxAtr.Attributes.Aggregate(atributes, (current, atr) => current + (formalContext.AttributeNames[atr] + ", "));
+            foreach (var obj in maxObj.Objects)
+            {
+                objects += formalContext.ObjectsNames[obj] + ", ";
+            }
+            Console.Clear();
+            Console.WriteLine("Recommendations: \n" +
+                              "You should pay attention to:\n" +
+                              "Attribute: " + atributes + "\n" +
+                              "Object: " + objects + "\n");
+            Console.ReadKey();
         }
 
         private static void SaveFormalContext(FormalContext formalContext)
@@ -63,7 +112,7 @@ namespace FormalConceptAnalysis
         /// <param name="LatticeAddAtom"></param>
         /// <param name="LatticeAddIntent"></param>
         /// 
-        private static void ShowDiagramFormalContext(FormalContext formalContext, Lattice LatticeAddAtom, Lattice LatticeAddIntent)
+        private static Lattice ShowDiagramFormalContext(FormalContext formalContext, Lattice LatticeAddAtom, Lattice LatticeAddIntent)
         {
             var flagClose = false;
             var flagTechSave = false;
@@ -175,16 +224,29 @@ namespace FormalConceptAnalysis
                         return;
                 }
             }
+            if (LatticeAddIntent != null)
+            {
+                return LatticeAddIntent;
+            }
+
+            return LatticeAddAtom;
         }
-
         
-
         /// <summary>
         /// Show information about the program
         /// </summary>
         private static void ShowInfo()
         {
-            Console.WriteLine("SOME INFORMATION\n");
+            Console.WriteLine("About:\n");
+            Console.WriteLine("This application is designed to search for maximum rectangles in a given incidence matrix:");
+            Console.WriteLine("You can enter a matrix (press 1), build/save/view the constructed concept lattice using one of the methods (press 2), view the entered matrix (press 3), save the entered matrix (press 4), and view recommendations for the constructed concept lattices (press 5). Press e to exit.");
+            Console.WriteLine();
+            Console.WriteLine("Input of the matrix can be done via a JSON file (press 1) or manual input (press 2). For manual input, follow the input example.");
+            Console.WriteLine("The concept lattice can be built using two algorithms, AddAtom or AddIntent (press a or i, respectively), or both algorithms at once (press b). Saving is done in JSON format (press s). Press m to exit the menu.");
+            Console.WriteLine();
+            Console.WriteLine("Saving the matrix is done in JSON format.");
+            Console.WriteLine();
+            Console.WriteLine("Some simple recommendations from the algorithm's work (press 5).");
         }
         /// <summary>
         /// Show main menu of the program
@@ -197,7 +259,9 @@ namespace FormalConceptAnalysis
                               "1) Input formal context ( 1 )\n" +
                               "2) Show diagram ( 2 )\n" +
                               "3) Show formal context ( 3 )\n" +
-                              "4) Exit ( 'e' )\n");
+                              "4) Save formal context ( 4 )\n" +
+                              "5) Recommendations ( 5 )\n" +
+                              "6) Exit ( 'e' )\n");
         }
         /// <summary>
         /// Input formal context
