@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormalConceptAnalysis", "FormalConceptAnalysis\FormalConceptAnalysis.csproj", "{319BE401-83A5-4EEB-9A59-B63FCFE51F43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormalConceptAnalysis.Tests", "FormalConceptAnalysis.Tests\FormalConceptAnalysis.Tests.csproj", "{031F614B-B4C0-43DE-8DFF-D5637AFB4024}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{319BE401-83A5-4EEB-9A59-B63FCFE51F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{319BE401-83A5-4EEB-9A59-B63FCFE51F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{319BE401-83A5-4EEB-9A59-B63FCFE51F43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031F614B-B4C0-43DE-8DFF-D5637AFB4024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031F614B-B4C0-43DE-8DFF-D5637AFB4024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031F614B-B4C0-43DE-8DFF-D5637AFB4024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031F614B-B4C0-43DE-8DFF-D5637AFB4024}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

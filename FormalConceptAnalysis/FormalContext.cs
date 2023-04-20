@@ -14,7 +14,9 @@ public class FormalContext
     [JsonProperty("incidences"), ]
     public string[] Incidence { get; set; }
     
-    internal Dictionary<string, string[]> IncidenceSeparated { get; set; }
+    public Dictionary<string, int> ObjectsNamesNumbers { get; set; }
+    public Dictionary<string, int> AttributesNamesNumbers { get; set; }
+    public Dictionary<string, List<int>> IncidenceSeparated { get; set; }
 
     /// <summary>
     /// Constructor from 3 strings.
@@ -27,10 +29,27 @@ public class FormalContext
         ObjectsNames = objectsNames;
         AttributeNames = attributeNames;
         Incidence = incidence;
-        IncidenceSeparated = new Dictionary<string, string[]>();
+        IncidenceSeparated = new Dictionary<string, List<int>>();
+        ObjectsNamesNumbers = new Dictionary<string, int>();
+        AttributesNamesNumbers = new Dictionary<string, int>();
+
+        var counter = 0;
         foreach (var VARIABLE in incidence)
         {
-            IncidenceSeparated.Add(VARIABLE.Split(":")[0], VARIABLE.Split(":")[1].Trim().Split(','));
+            ObjectsNamesNumbers.Add( objectsNames[counter] , counter++);
+            var strAttrNums = VARIABLE.Split(":")[1].Trim().Split(',');
+            var lstAttribute = new List<int>();
+            foreach (var v in strAttrNums)
+            {
+                if (!String.IsNullOrEmpty(v)) lstAttribute.Add(int.Parse(v));
+            }
+            IncidenceSeparated.Add(VARIABLE.Split(":")[0], lstAttribute);
+        }
+
+        counter = 0;
+        foreach (var VARIABLE in attributeNames)
+        {
+            if (!String.IsNullOrEmpty(VARIABLE)) AttributesNamesNumbers.Add( VARIABLE , counter++);
         }
     }
 };

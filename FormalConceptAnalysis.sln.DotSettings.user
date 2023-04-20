@@ -1,2 +1,56 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/aimbjp/Library/Caches/JetBrains/Rider2022.3/resharper-host/temp/Rider/vAny/CoverageData/_FormalConceptAnalysis.-54999815/Snapshot/snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=170e96f3_002D4e3b_002D4189_002Db991_002Dedb0bc3dec04/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AddAtom_Compare_AddIntent_Random" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.LatticeTests.AddAtom_Compare_AddIntent_Random&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2873b014_002D725c_002D4a5e_002Dbb9d_002D802e8779035f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Constructor_CreateObjectWithCorrectObjectsNames #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.FormalContextTests.Constructor_CreateObjectWithCorrectObjectsNames&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2b541477_002Dcee2_002D4ac7_002Dbd36_002D99b246f68921/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="FormalContextTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.FormalContextTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=32be075e_002D18ee_002D41a3_002Dae0c_002Dbe028ba50a4d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=407345ec_002Dcb5e_002D4015_002D884f_002Dad0ad4305304/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Constructor_CreateObjectWithCorrectObjectsNames" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.FormalContextTests.Constructor_CreateObjectWithCorrectObjectsNames&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5450ea98_002Db2ef_002D4ea7_002D87ca_002D03c9c40eccf7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=767d1fd3_002Df53b_002D4a28_002D8d78_002D0b76d0cd5a30/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AddAtom_Compare_AddIntent_Random #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=824e1616_002D7f42_002D4f6e_002Db264_002Da9823d7914e0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="FormalContextTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.FormalContextTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a82336ad_002Db453_002D428c_002Daa2b_002D9e03d44c41e1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="FormalContextTests #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.FormalContextTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c46c33a5_002D3787_002D4738_002D8610_002Dd22b7239c808/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AddAtom_Compare_AddIntent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cc0a3e23_002D7a76_002D456a_002D876a_002Da22fe63775b4/@EntryIndexedValue"></s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e4cb4673_002D13d5_002D4c9c_002Da1a4_002D19aac0311d97/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.Tests.Test1&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=feb8e886_002D2fe8_002D4658_002Dba31_002Dd8875e32dcf4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="FormalContextTests #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::031F614B-B4C0-43DE-8DFF-D5637AFB4024::net7.0::FormalConceptAnalysis.Tests.FormalContextTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Enterence/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
