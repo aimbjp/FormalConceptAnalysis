@@ -1,29 +1,29 @@
 namespace FormalConceptAnalysis;
 
-public abstract class Node
+public class Node
 {
     public List<int> Objects { get; set; }
     public List<int> Attributes { get; set; }
     public int Id { get; set; }
-    public int ParentId { get; set; }
-    public List<int> Children { get; set; }
+    // public List<int> ParentsId { get; set; }
+    // public List<int> Children { get; set; }
 
     public Node()
     {
         Objects = new List<int>();
         Attributes = new List<int>();
         Id = -1;
-        ParentId = -1;
-        Children = new List<int>();
+        // ParentsId = new List<int>();
+        // Children = new List<int>();
     }
     
-    public Node(List<int> Objects, List<int> Attributes, int ID, int ParentID, List<int> Childrens)
+    public Node(List<int> Objects, List<int> Attributes, int ID)
     {
         this.Objects = Objects;
         this.Attributes = Attributes;
         this.Id = ID;
-        this.ParentId = ParentID;
-        this.Children = Childrens;
+        // this.ParentsId = ParentID;
+        // this.Children = Childrens;
     }
 
     
