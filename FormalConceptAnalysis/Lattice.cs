@@ -209,14 +209,19 @@ public class Lattice
                 if (generatorParents[i].Attributes.Except(ints).Any())
                     generatorParents[i] = Add(generatorParents[i].Attributes.Intersect(ints).ToList(), generatorParents[i]);
                 var addParent = true;
-                var NewParentsCopy = NewParents;
-                for (int j = 0; j < NewParents.Count; j++)
+                var NewParentsCopy = NewParents.ToList();
+                // for (int j = 0; j < NewParents.Count; j++)
+                // {
+                //     if (generatorParents[i].Attributes.Union(NewParents[j].Attributes).Count() ==
+                //         NewParents[j].Attributes.Count()) addParent = false;
+                //     else if (NewParents[j].Attributes.Union(generatorParents[i].Attributes).Count() == generatorParents[i].Attributes.Count()) NewParents.RemoveAt(j);
+                // }
+                foreach (var parent in NewParents)
                 {
-                    if (generatorParents[i].Attributes.Union(NewParents[j].Attributes).Count() ==
-                        NewParents[j].Attributes.Count()) addParent = false;
-                    else if (NewParents[j].Attributes.Union(generatorParents[i].Attributes).Count() == generatorParents[i].Attributes.Count()) NewParentsCopy.RemoveAt(j);
+                    if (generatorParents[i].Attributes.Union(parent.Attributes).Count() ==
+                        parent.Attributes.Count()) addParent = false;
+                    else if (parent.Attributes.Union(generatorParents[i].Attributes).Count() == generatorParents[i].Attributes.Count()) NewParentsCopy.Remove(parent);
                 }
-
                 NewParents = NewParentsCopy;
                 
                 if (addParent) NewParents.Add(generatorParents[i]);
