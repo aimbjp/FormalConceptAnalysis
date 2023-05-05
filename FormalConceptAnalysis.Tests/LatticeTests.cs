@@ -9,7 +9,7 @@ public class LatticeTests
     FormalContext formalContext2;
     FormalContext formalContext3;
     FormalContext formalContext4;
-
+    
     
     Lattice latticeAtom1;
     Lattice latticeAtom2;
@@ -19,7 +19,7 @@ public class LatticeTests
     Lattice latticeIntent2;
     Lattice latticeIntent3;
     Lattice latticeIntent4;
-
+    
     [SetUp]
     public void SetUp()
     {
@@ -35,11 +35,11 @@ public class LatticeTests
         formalContext4 = new FormalContext(new string[] { "A", "B", "C", "D", "E", "F" },
             new string[] { "a1", "1", "X", "Y", "Z"},
                 new string[] { "0: 0,2,4", "1: 0,1,5", "2: 2,3,4", "3: 0,3,5 ", "4: 1,4" });
-
+    
         // new FormalContext(new string[] { "A", "B", "C", "D", "E", "f" },
         //     new string[] { "a1", "1", "X", "Y", "Z", "d"},
         //     new string[] { "0: 1,4", "1: 0,3", "2: 0,1,2,4", "3: 0,2,3,4 ", "4: 2,3,4", "5: 2,3,4" });
-
+    
         latticeAtom1 = new Lattice(formalContext1, "addatom");
         latticeAtom2 = new Lattice(formalContext2, "addatom");
         latticeAtom3 = new Lattice(formalContext3, "addatom");
@@ -57,7 +57,7 @@ public class LatticeTests
         Assert.AreEqual(8, latticeAtom2.nodes.Count);
         Assert.AreEqual(14, latticeAtom3.nodes.Count);
     }
-
+    
     [Test]
     public void AddAtom_AddsLinksToList()
     {
@@ -65,7 +65,7 @@ public class LatticeTests
         Assert.AreEqual(12, latticeAtom2.links.Count);
         Assert.AreEqual(24, latticeAtom3.links.Count);
     }
-
+    
     [Test]
     public void AddAtom_NodeValues()
     {
@@ -82,7 +82,7 @@ public class LatticeTests
         Assert.AreEqual(latticeAtom1.nodes[3].Attributes, new  List<int>{1,2}); 
         Assert.AreEqual(latticeAtom1.nodes[3].Id, 3);
     }
-
+    
     [Test]
     public void AddAtom_LinksValues()
     {
@@ -95,7 +95,7 @@ public class LatticeTests
         Assert.AreEqual(latticeAtom1.links[3].Id, 3);
         Assert.AreEqual(latticeAtom1.links[3].LinkedTo, 0);
     }
-
+    
     [Test]
     public void AddIntent_AddsNodeToList()
     {
@@ -141,7 +141,7 @@ public class LatticeTests
         Assert.AreEqual(latticeIntent1.links[3].Id, 3);
         Assert.AreEqual(latticeIntent1.links[3].LinkedTo, 0);
     }
-
+    
     [Test]
     public void AddAtom_Compare_AddIntent()
     {
@@ -156,7 +156,7 @@ public class LatticeTests
         }
         Assert.AreEqual(latticeAtom1.nodes.Count, counter, latticeIntent1.nodes.Count);
         Assert.AreEqual(latticeIntent1.links.Count, latticeAtom1.links.Count);
-
+    
          counter = 0;
         foreach (var node in latticeAtom2.nodes)
         {
@@ -193,7 +193,7 @@ public class LatticeTests
         Assert.AreEqual(latticeAtom4.nodes.Count, counter, latticeIntent4.nodes.Count);
         Assert.AreEqual(latticeIntent4.links.Count, latticeAtom4.links.Count);
     }
-
+    
     [Test]
     public void AddAtom_Compare_AddIntent_Random()
     {
@@ -238,7 +238,46 @@ public class LatticeTests
             }
             Assert.AreEqual(latticeAtom.nodes.Count, counter, latticeIntent.nodes.Count);
             Assert.AreEqual(latticeAtom.links.Count, latticeIntent.links.Count);
-
+    
         }
+    }
+
+    [Test]
+    public void AddAtom_Compare_AddIntent_Ref()
+    {
+        //Решетка AddAtom
+        var fileContentAddAtom = File.ReadAllText("example/latticeAddAtom.json");
+        var latticeAddAtom = JsonConvert.DeserializeObject<Lattice>(@fileContentAddAtom);
+        //Решетка AddIntent
+        var fileContentAddIntent = File.ReadAllText("example/latticeAddIntent.json");
+        var latticeAddIntent = JsonConvert.DeserializeObject<Lattice>(@fileContentAddAtom);
+        //Решетка из примера с сайта
+        var fileContentRef = File.ReadAllText("example/refLattice.json");
+        var latticeRef = JsonConvert.DeserializeObject<Lattice>(@fileContentAddAtom);
+    
+        //Счетчики совпадений
+        var atomCount = (from node in latticeAddAtom.nodes 
+                                from nodeInt in latticeRef.nodes 
+                                where nodeInt.Objects.SequenceEqual(node.Objects) && nodeInt.Attributes.SequenceEqual(node.Attributes) 
+                                select node).Count();
+    
+        var intentCount = (from node in latticeAddIntent.nodes 
+                                from nodeInt in latticeRef.nodes 
+                                where nodeInt.Objects.SequenceEqual(node.Objects) && nodeInt.Attributes.SequenceEqual(node.Attributes) 
+                                select node).Count();
+    
+        Assert.AreEqual(atomCount, intentCount, latticeAddAtom.nodes.Count);
+    
+        atomCount = (from link in latticeAddAtom.links 
+                        from linkRef in latticeRef.links 
+                        where linkRef.Id == link.Id && linkRef.LinkedTo == link.LinkedTo 
+                        select link).Count();
+    
+        intentCount = (from link in latticeAddIntent.links 
+                        from linkRef in latticeRef.links 
+                        where linkRef.Id == link.Id && linkRef.LinkedTo == link.LinkedTo 
+                        select link).Count();
+    
+        Assert.AreEqual(atomCount, intentCount, latticeAddAtom.nodes.Count);
     }
 }

@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace FormalConceptAnalysis;
 [Serializable]
 public class Lattice
@@ -5,7 +7,14 @@ public class Lattice
     public List<Node> nodes;
     public List<Link> links;
 
-    public Lattice(FormalContext formalContext, string algorithm)
+    [System.Text.Json.Serialization.JsonConstructor, JsonConstructor]
+    public Lattice(List<Node> nodes, List<Link> links)
+    {
+        this.nodes = nodes;
+        this.links = links;
+    }
+    
+    public Lattice(FormalContext formalContext, string algorithm = "addintent")
     {
         nodes = new List<Node>();
         links = new List<Link>();
